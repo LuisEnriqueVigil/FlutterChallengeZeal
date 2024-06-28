@@ -20,13 +20,18 @@ class ButtonOptionOnHome extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 200,
-        width: 180,
+        margin: const EdgeInsets.symmetric(
+          horizontal: 10.0
+        ),
+        height: 100,
+        width: 80,
         decoration: BoxDecoration(
           color: ColorApp.colorBackgroundButton,
           borderRadius: BorderRadius.circular(5.0)
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               iconData,

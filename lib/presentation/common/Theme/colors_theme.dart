@@ -12,8 +12,8 @@ class ColorApp {
   static const Color colorPrincipalApp = Colors.black;
   static const Color backgroundApp = Colors.white;
   static const Color colorTextOnBackground = Colors.white;
-  static const Color colorBackgroundButton = Colors.grey;
+  static Color colorBackgroundButton = Colors.grey.withOpacity(0.80);
   static const Color colorTextBody = Colors.black;
-  static const Color colorIconApp = Colors.orange;
+  static const Color colorIconApp = Colors.white;
 
 }

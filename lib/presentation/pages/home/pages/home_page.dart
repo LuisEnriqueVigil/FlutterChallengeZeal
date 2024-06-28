@@ -1,8 +1,11 @@
 import 'package:challenge_app/presentation/common/Theme/colors_theme.dart';
 import 'package:challenge_app/presentation/common/Theme/font_size_theme.dart';
 import 'package:challenge_app/presentation/common/widgets/text_style_theme.dart';
+import 'package:challenge_app/presentation/common/widgets/user_info_widget.dart';
 import 'package:challenge_app/presentation/pages/home/controller/home_controller.dart';
+import 'package:challenge_app/presentation/common/widgets/app_bar_widget.dart';
 import 'package:challenge_app/presentation/pages/home/widgets/button_option_on_home_widget.dart';
+import 'package:challenge_app/presentation/pages/home/widgets/row_title_button_home_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,50 +19,74 @@ class HomePage extends GetWidget<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-            decoration: const BoxDecoration(
-                color: ColorApp.colorPrincipalApp,
-                borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(10.0))),
-            width: double.infinity,
-            height: 40.0,
-            child: const TextStyleWidget(
-              colorText: ColorApp.colorTextOnBackground,
-              fontSize: FontSizeApp.h1FontSize,
+          const AppBarWidget(),
+          const SizedBox(height: 15.0),
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: TextStyleWidget(
+              colorText: ColorApp.colorTextBody,
+              fontSize: FontSizeApp.h0FontSize,
               fontWeight: FontWeight.bold,
-              text: "Hola Luis",
+              text: "¿Que deseas hacer hoy?",
             ),
           ),
-          const TextStyleWidget(
-            colorText: ColorApp.colorTextBody,
-            fontSize: FontSizeApp.h1FontSize,
-            fontWeight: FontWeight.bold,
-            text: "¿Que deseas hacer hoy?",
+          const SizedBox(height: 15.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ButtonOptionOnHome(
+                iconData: Icons.add_reaction,
+                onTap: (){},
+                titleButton: "Nuevo",
+              ),
+              ButtonOptionOnHome(
+                iconData: Icons.edit_note_sharp,
+                onTap: (){},
+                titleButton: "Editar",
+              ),
+              ButtonOptionOnHome(
+                iconData: Icons.delete_sweep_rounded,
+                onTap: (){},
+                titleButton: "Eliminar",
+              )
+            ],
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ButtonOptionOnHome(
-                  iconData: Icons.add_reaction,
-                  onTap: (){},
-                  titleButton: "Nuevo",
-                ),
-                ButtonOptionOnHome(
-                  iconData: Icons.edit_note_sharp,
-                  onTap: (){},
-                  titleButton: "Editar",
-                ),
-                ButtonOptionOnHome(
-                  iconData: Icons.delete_sweep_rounded,
-                  onTap: (){},
-                  titleButton: "Eliminar",
-                )
-              ],
-            ),
+          const SizedBox(height: 20.0),
+          const RowTitleButtonHomeWidget(),
+          const SizedBox(height: 5.0),
+          Expanded(
+            child: GetBuilder<HomeController>(
+              builder: (controller) { 
+                return(controller.loadingGetUsers.value == true)?
+                    Center(
+                      child: Container(
+                      margin: const EdgeInsets.only(
+                        top: 40.0
+                      ),
+                      height: 40.0,width: 40.0,
+                      child: const CircularProgressIndicator(
+                        color: ColorApp.colorPrincipalApp,
+                      ),
+                                ),
+                    ) 
+                  :  
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.only(
+                      top: 0.0
+                  ),
+                  itemCount: controller.userList.length,
+                  itemBuilder: (context,index){
+                    return UserInfoWidget(
+                      username: controller.userList[index].name??"",
+                      userEmail: controller.userList[index].email??"",
+                      userModel: controller.userList[index]
+                    );
+                  }
+                );
+              }
+            )
           )
         ],
       ),

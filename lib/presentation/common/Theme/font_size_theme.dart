@@ -7,7 +7,7 @@ class FontSizeApp {
   }
   
   FontSizeApp._internal();
-
+  static const double h0FontSize = 20.0 ; 
   static const double h1FontSize = 18.0 ; 
   static const double h2FontSize = 16.0; 
   static const double h3FontSize = 14.0; 
