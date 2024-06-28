@@ -37,7 +37,7 @@ class RowTitleButtonHomeWidget extends GetWidget<HomeController> {
                   colorText: ColorApp.colorTextBody,
                   fontSize: FontSizeApp.h1FontSize,
                   fontWeight: FontWeight.normal,
-                  text: "Ver todo",
+                  text: "Ver todo", 
                 ),
                 IconButton(
                   onPressed: (){

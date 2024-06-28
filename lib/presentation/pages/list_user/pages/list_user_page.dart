@@ -28,15 +28,20 @@ class ListOfAllUserPage extends GetWidget<ListOfAllUserController> {
                 colorText: ColorApp.colorTextBody,
                 fontSize: FontSizeApp.h0FontSize),
             Expanded(
-              child: ListView.builder(
-                  itemCount: 30,
-                  itemBuilder: (context, index) {
-                    return UserInfoWidget(
-                      userEmail: "",
-                      userModel: UserModel(),
-                      username: "",
-                    );
-                  }),
+              child: GetBuilder<ListOfAllUserController>(
+                builder: (controller) {
+                  return ListView.builder(
+                      itemCount: controller.listOfUsers.length,
+                      itemBuilder: (context, index) {
+                        return UserInfoWidget(
+                          isViewButtonDetail: true,
+                          userEmail: controller.listOfUsers[index].email??"",
+                          userModel: controller.listOfUsers[index],
+                          username: controller.listOfUsers[index].name??"",
+                        );
+                      });
+                }
+              ),
             )
           ],
         ),

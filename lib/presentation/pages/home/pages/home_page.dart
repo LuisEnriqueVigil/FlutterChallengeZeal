@@ -79,6 +79,7 @@ class HomePage extends GetWidget<HomeController> {
                   itemCount: controller.userList.length,
                   itemBuilder: (context,index){
                     return UserInfoWidget(
+                      isViewButtonDetail: false,
                       username: controller.userList[index].name??"",
                       userEmail: controller.userList[index].email??"",
                       userModel: controller.userList[index]
