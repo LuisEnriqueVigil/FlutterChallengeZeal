@@ -2,9 +2,9 @@ import 'package:challenge_app/domain/model/user_model.dart';
 import 'package:challenge_app/presentation/common/Theme/colors_theme.dart';
 import 'package:challenge_app/presentation/common/Theme/font_size_theme.dart';
 import 'package:challenge_app/presentation/common/widgets/text_style_theme.dart';
+import 'package:challenge_app/presentation/pages/list_user/controller/list_user_controller.dart';
 import 'package:challenge_app/presentation/pages/list_user/widgets/bottom_action_bottom_sheet_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class UserInfoWidget extends StatelessWidget {
@@ -92,21 +92,28 @@ class UserInfoWidget extends StatelessWidget {
                         Center(
                           child: SizedBox(
                             width: double.infinity,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                BottomActionOnBottomSheet(
-                                  iconData: Icons.edit,
-                                  onTap: () {},
-                                  titleButton: "Editar",
-                                ),
-                                const SizedBox(width: 50.0),
-                                BottomActionOnBottomSheet(
-                                  iconData: Icons.delete_sweep_outlined,
-                                  onTap: () {},
-                                  titleButton: "Eliminar",
-                                ),
-                              ],
+                            child: GetBuilder<ListOfAllUserController>(
+                              builder: (controller) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    BottomActionOnBottomSheet(
+                                      iconData: Icons.edit,
+                                      onTap: () {},
+                                      titleButton: "Editar",
+                                    ),
+                                    const SizedBox(width: 50.0),
+                                    BottomActionOnBottomSheet(
+                                      iconData: Icons.delete_sweep_outlined,
+                                      onTap: () async{
+                                        controller.isDeleteUser.value = await controller.deleteUser(userModel.id.toString());
+                                        Get.back();
+                                      },
+                                      titleButton: "Eliminar",
+                                    ),
+                                  ],
+                                );
+                              }
                             ),
                           ),
                         )

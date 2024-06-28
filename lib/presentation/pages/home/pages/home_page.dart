@@ -19,7 +19,9 @@ class HomePage extends GetWidget<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const AppBarWidget(),
+          const AppBarWidget(
+            titleAppBar: "Bienvenido",
+          ),
           const SizedBox(height: 15.0),
           const Padding(
             padding: EdgeInsets.only(left: 10.0),
@@ -47,7 +49,8 @@ class HomePage extends GetWidget<HomeController> {
               ),
               ButtonOptionOnHome(
                 iconData: Icons.delete_sweep_rounded,
-                onTap: (){},
+                onTap: (){
+                },
                 titleButton: "Eliminar",
               )
             ],

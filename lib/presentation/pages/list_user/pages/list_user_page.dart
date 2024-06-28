@@ -1,12 +1,9 @@
-import 'package:challenge_app/domain/model/user_model.dart';
 import 'package:challenge_app/presentation/common/Theme/colors_theme.dart';
 import 'package:challenge_app/presentation/common/Theme/font_size_theme.dart';
 import 'package:challenge_app/presentation/common/widgets/text_style_theme.dart';
 import 'package:challenge_app/presentation/common/widgets/user_info_widget.dart';
 import 'package:challenge_app/presentation/pages/list_user/controller/list_user_controller.dart';
-import 'package:challenge_app/presentation/pages/list_user/widgets/bottom_action_bottom_sheet_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class ListOfAllUserPage extends GetWidget<ListOfAllUserController> {
@@ -15,7 +12,19 @@ class ListOfAllUserPage extends GetWidget<ListOfAllUserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: 
+      GetBuilder<ListOfAllUserController>(
+        builder: (controller) {
+          return (controller.loadingDeleteUser.value == true )?
+          
+          const Center(
+            child: SizedBox(
+              height: 40.0,width: 40.0,
+              child: CircularProgressIndicator(),
+            ),
+          )
+          :
+      Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +54,10 @@ class ListOfAllUserPage extends GetWidget<ListOfAllUserController> {
             )
           ],
         ),
-      ),
+        );
+        }
+      ) 
+      
     );
   }
 }

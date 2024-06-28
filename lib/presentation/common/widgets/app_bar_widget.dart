@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 
 
 class AppBarWidget extends StatelessWidget {
+  final String titleAppBar; 
+  
   const AppBarWidget({
-    super.key,
+    super.key, required this.titleAppBar,
   });
 
   @override
@@ -22,11 +24,11 @@ class AppBarWidget extends StatelessWidget {
               BorderRadius.vertical(bottom: Radius.circular(20.0))),
       width: double.infinity,
       height: 110.0,
-      child: const TextStyleWidget(
+      child:  TextStyleWidget(
         colorText: ColorApp.colorTextOnBackground,
         fontSize:FontSizeApp.h0FontSize,
         fontWeight: FontWeight.bold,
-        text: "Hola Usuario",
+        text: titleAppBar,
       ),
     );
   }

@@ -8,7 +8,7 @@ class GetUserService{
 
     Future<List<UserModel>> getAllUsers () async{
 
-    //try {
+    try {
        final url = Uri.https( EnviromentApp.baseurl, "/users");
     
        final resp = await http.get(
@@ -30,9 +30,9 @@ class GetUserService{
         return[];
        }
      } 
-   //catch (e) {
-   //  return[];
-   //}
+   catch (e) {
+     return[];
+   }
     
-  //}
+  }
  }
