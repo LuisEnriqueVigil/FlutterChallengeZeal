@@ -6,6 +6,7 @@ import 'package:challenge_app/presentation/pages/home/controller/home_controller
 import 'package:challenge_app/presentation/common/widgets/app_bar_widget.dart';
 import 'package:challenge_app/presentation/pages/home/widgets/button_option_on_home_widget.dart';
 import 'package:challenge_app/presentation/pages/home/widgets/row_title_button_home_widget.dart';
+import 'package:challenge_app/presentation/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +40,9 @@ class HomePage extends GetWidget<HomeController> {
             children: [
               ButtonOptionOnHome(
                 iconData: Icons.add_reaction,
-                onTap: (){},
+                onTap: (){
+                  Get.toNamed(AppRoutes.addNewUser);
+                },
                 titleButton: "Nuevo",
               ),
               ButtonOptionOnHome(
