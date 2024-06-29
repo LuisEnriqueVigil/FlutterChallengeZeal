@@ -1,5 +1,6 @@
 import 'package:challenge_app/presentation/common/Theme/colors_theme.dart';
 import 'package:challenge_app/presentation/common/Theme/font_size_theme.dart';
+import 'package:challenge_app/presentation/common/widgets/loading_progress_app_widget.dart';
 import 'package:challenge_app/presentation/common/widgets/text_style_theme.dart';
 import 'package:challenge_app/presentation/common/widgets/user_info_widget.dart';
 import 'package:challenge_app/presentation/pages/list_user/controller/list_user_controller.dart';
@@ -17,12 +18,7 @@ class ListOfAllUserPage extends GetWidget<ListOfAllUserController> {
         builder: (controller) {
           return (controller.loadingDeleteUser.value == true )?
           
-          const Center(
-            child: SizedBox(
-              height: 40.0,width: 40.0,
-              child: CircularProgressIndicator(),
-            ),
-          )
+          const LoadingProgressAppWidget()
           :
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),

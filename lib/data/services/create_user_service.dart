@@ -3,18 +3,21 @@ import 'package:challenge_app/domain/env/envioroment.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class DeleteUserService{
+class CreateUserService{
 
-    Future<bool> deleteUser (String idDelete) async{
+    Future<bool> createUser (String username, String lastname, int userId) async{
 
-    try {
-       final url = Uri.https( EnviromentApp.baseurl, "/users/$idDelete");
-    
-       final resp = await http.delete(
+    //try {
+       final url = Uri.https( EnviromentApp.baseurl, "/users");
+       final data = {
+          "userId":userId.toString(),
+          "title":username,
+          "body":lastname,
+          
+       };
+       final resp = await http.post(
           url,
-          headers: {
-            "Content-Type": "application/json",
-          },
+          body: data,
        ).timeout(
           const Duration(seconds: 8),
           onTimeout: (){
@@ -22,16 +25,16 @@ class DeleteUserService{
           }
         ); 
        debugPrint("response delete: ${resp.body} and code ${resp.statusCode}");
-       if (resp.statusCode == 200) {
+       if (resp.statusCode == 201) {
         return true;
        }
        else{
         return false;
        }
-     } 
-   catch (e) {
-      return false;
-   }
+     //s} 
+   //catch (e) {
+    //  return false;
+   //}
     
   }
  }
