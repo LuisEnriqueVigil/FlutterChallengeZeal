@@ -1,7 +1,5 @@
-import 'package:challenge_app/presentation/common/Theme/colors_theme.dart';
-import 'package:challenge_app/presentation/common/Theme/font_size_theme.dart';
+import 'package:challenge_app/presentation/common/widgets/app_bar_widget.dart';
 import 'package:challenge_app/presentation/common/widgets/loading_progress_app_widget.dart';
-import 'package:challenge_app/presentation/common/widgets/text_style_theme.dart';
 import 'package:challenge_app/presentation/common/widgets/user_info_widget.dart';
 import 'package:challenge_app/presentation/pages/list_user/controller/list_user_controller.dart';
 import 'package:flutter/material.dart';
@@ -16,41 +14,39 @@ class ListOfAllUserPage extends GetWidget<ListOfAllUserController> {
       body: 
       GetBuilder<ListOfAllUserController>(
         builder: (controller) {
-          return (controller.loadingDeleteUser.value == true )?
-          
+          return (controller.loadingDeleteUser.value == true )?          
           const LoadingProgressAppWidget()
           :
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 40.0),
-            const TextStyleWidget(
-                text: "Todos los usuarios",
-                fontWeight: FontWeight.bold,
-                colorText: ColorApp.colorTextBody,
-                fontSize: FontSizeApp.h0FontSize),
-            Expanded(
-              child: GetBuilder<ListOfAllUserController>(
-                builder: (controller) {
-                  return ListView.builder(
-                      itemCount: controller.listOfUsers.length,
-                      itemBuilder: (context, index) {
-                        return UserInfoWidget(
-                          isViewButtonDetail: true,
-                          userEmail: controller.listOfUsers[index].email??"",
-                          userModel: controller.listOfUsers[index],
-                          username: controller.listOfUsers[index].name??"",
-                        );
-                      });
-                }
+      GetBuilder<ListOfAllUserController>(
+        builder: (controller) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+               AppBarWidget(
+                titleAppBar: (controller.origin.value == "delete")?
+                  "Selecciona el que se eliminara"
+                  : 
+                  (controller.origin.value == "update")?
+                  "Selecciona para editar":
+                  "Todos los usuarios"
               ),
-            )
-          ],
-        ),
-        );
+              Expanded(
+                child:  ListView.builder(
+                 itemCount: controller.listOfUsers.length,
+                 itemBuilder: (context, index) {
+                   return UserInfoWidget(
+                     isViewButtonDetail: true,
+                     userEmail: controller.listOfUsers[index].email??"",
+                     userModel: controller.listOfUsers[index],
+                     username: controller.listOfUsers[index].name??"",
+                   );
+                 })
+              )
+            ],
+          );
+        }
+      );
         }
       ) 
       

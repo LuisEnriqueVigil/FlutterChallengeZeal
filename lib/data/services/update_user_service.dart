@@ -1,21 +1,23 @@
+//users/{id}
+
 
 import 'package:challenge_app/domain/env/envioroment.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class CreateUserService{
+class UpdateUserService{
 
-    Future<bool> createUser (String username, String lastname, int userId) async{
+    Future<bool> updateUser (String username, String lastname, int userId,int id) async{
 
     try {
-       final url = Uri.https( EnviromentApp.baseurl, "/users");
+       final url = Uri.https( EnviromentApp.baseurl, "/users/$userId");
        final data = {
           "userId":userId.toString(),
           "title":username,
           "body":lastname,
-          
+          "id":id.toString()
        };
-       final resp = await http.post(
+       final resp = await http.put(
           url,
           body: data,
        ).timeout(

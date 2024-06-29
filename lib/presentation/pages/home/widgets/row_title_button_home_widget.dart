@@ -29,13 +29,13 @@ class RowTitleButtonHomeWidget extends GetWidget<HomeController> {
             text: "Usuarios",
           ),
           SizedBox(
-            width: Get.width*0.30,
+            width: Get.width*0.32,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 const TextStyleWidget(
                   colorText: ColorApp.colorTextBody,
-                  fontSize: FontSizeApp.h1FontSize,
+                  fontSize: FontSizeApp.h2FontSize,
                   fontWeight: FontWeight.normal,
                   text: "Ver todo", 
                 ),

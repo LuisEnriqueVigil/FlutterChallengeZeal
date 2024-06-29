@@ -9,6 +9,6 @@ class MainBinding extends Bindings{
     Get.put(HomeController());
     Get.put(ListOfAllUserController());
     Get.put(NewUserController());
-
+  
   }
 }

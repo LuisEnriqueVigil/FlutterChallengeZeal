@@ -23,7 +23,7 @@ class InputCreatNewUserWidget extends StatelessWidget {
           validator: (value) {
             return ((value ?? "").length > 3)
                 ? null
-                : "EScribe al menos un caracter";
+                : "Escribe al menos 3 caracteres";
           },
           onChanged: onChange,
           decoration:  InputDecoration(

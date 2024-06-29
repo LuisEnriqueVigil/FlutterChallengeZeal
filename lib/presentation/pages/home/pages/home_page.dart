@@ -6,6 +6,7 @@ import 'package:challenge_app/presentation/pages/home/controller/home_controller
 import 'package:challenge_app/presentation/common/widgets/app_bar_widget.dart';
 import 'package:challenge_app/presentation/pages/home/widgets/button_option_on_home_widget.dart';
 import 'package:challenge_app/presentation/pages/home/widgets/row_title_button_home_widget.dart';
+import 'package:challenge_app/presentation/pages/list_user/controller/list_user_controller.dart';
 import 'package:challenge_app/presentation/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,12 +48,21 @@ class HomePage extends GetWidget<HomeController> {
               ),
               ButtonOptionOnHome(
                 iconData: Icons.edit_note_sharp,
-                onTap: (){},
+                onTap: (){
+                  ListOfAllUserController listOfAllUserController = Get.find<ListOfAllUserController>();
+                  listOfAllUserController.origin.value = "update";
+                  listOfAllUserController.update();                  
+                  Get.toNamed(AppRoutes.listUsers);
+                },
                 titleButton: "Editar",
               ),
               ButtonOptionOnHome(
                 iconData: Icons.delete_sweep_rounded,
                 onTap: (){
+                  ListOfAllUserController listOfAllUserController = Get.find<ListOfAllUserController>();
+                    listOfAllUserController.origin.value = "delete";
+                    listOfAllUserController.update();
+                  Get.toNamed(AppRoutes.listUsers);
                 },
                 titleButton: "Eliminar",
               )

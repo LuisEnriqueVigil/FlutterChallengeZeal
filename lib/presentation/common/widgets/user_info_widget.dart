@@ -53,7 +53,7 @@ class UserInfoWidget extends StatelessWidget {
                   colorText: ColorApp.colorTextBody,
                   fontSize: FontSizeApp.h1FontSize),
               SizedBox(
-                width: Get.width*0.60,
+                width: Get.width*0.52,
                 child: TextStyleWidget(
                     text: "email: $userEmail",
                     fontWeight: FontWeight.normal,
