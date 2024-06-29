@@ -27,7 +27,7 @@ class UpdateUserService{
           }
         ); 
        debugPrint("response delete: ${resp.body} and code ${resp.statusCode}");
-       if (resp.statusCode == 201) {
+       if (resp.statusCode == 200) {
         return true;
        }
        else{

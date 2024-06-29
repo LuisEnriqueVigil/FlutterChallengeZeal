@@ -2,8 +2,11 @@ import 'package:challenge_app/domain/model/user_model.dart';
 import 'package:challenge_app/presentation/common/Theme/colors_theme.dart';
 import 'package:challenge_app/presentation/common/Theme/font_size_theme.dart';
 import 'package:challenge_app/presentation/common/widgets/text_style_theme.dart';
+import 'package:challenge_app/presentation/pages/edit_user/controller/edit_user_controller.dart';
 import 'package:challenge_app/presentation/pages/list_user/controller/list_user_controller.dart';
 import 'package:challenge_app/presentation/pages/list_user/widgets/bottom_action_bottom_sheet_widget.dart';
+import 'package:challenge_app/presentation/routes/app_routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -99,15 +102,41 @@ class UserInfoWidget extends StatelessWidget {
                                   children: [
                                     BottomActionOnBottomSheet(
                                       iconData: Icons.edit,
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.back();
+                                        EditUserController editUserController = Get.find<EditUserController>();
+                                        editUserController.id.value = userModel.id??0;
+                                        editUserController.userID.value = userModel.id??0;
+                                        editUserController.userName.value = userModel.name??"";
+                                        editUserController.lastName.value = userModel.username ??""; 
+                                        Get.toNamed(AppRoutes.editUser);
+
+                                      },
                                       titleButton: "Editar",
                                     ),
                                     const SizedBox(width: 50.0),
                                     BottomActionOnBottomSheet(
                                       iconData: Icons.delete_sweep_outlined,
                                       onTap: () async{
-                                        controller.isDeleteUser.value = await controller.deleteUser(userModel.id.toString());
                                         Get.back();
+                                        bool isDelete = await controller.deleteUser(userModel.id.toString());
+                                        controller.listOfUsers.removeWhere((element) => element.id == userModel.id);
+                                        controller.update();
+                                        if(isDelete){
+                                         Get.snackbar(
+                                           "Exito", 
+                                           backgroundColor:CupertinoColors.activeGreen,
+                                           "Usuario eliminado",
+                                           duration:const Duration(seconds: 2) 
+                                         );
+                                        }else{
+                                         Get.snackbar(
+                                           "Error",
+                                           "No se pudo eliminar el usuario...",
+                                           duration: const Duration(seconds: 2),
+                                           backgroundColor:CupertinoColors.destructiveRed,
+                                         );
+                                        }
                                       },
                                       titleButton: "Eliminar",
                                     ),

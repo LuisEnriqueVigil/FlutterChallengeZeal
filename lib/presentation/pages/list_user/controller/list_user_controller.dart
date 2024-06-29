@@ -9,13 +9,13 @@ class ListOfAllUserController extends GetxController{
   RxBool loadingDeleteUser = false.obs;
   DeleteUserService deleteUserService = DeleteUserService();
   GetUserService getUserService = GetUserService();
-  RxBool isDeleteUser = false.obs;
 
   //managment origin
   RxString origin = "".obs;
 
   Future<bool> deleteUser(String idUser)async{
     loadingDeleteUser.value = true;
+    update();
     bool isDelete = await deleteUserService.deleteUser(idUser);
     listOfUsers =  await getUserService.getAllUsers();
     loadingDeleteUser.value = false;

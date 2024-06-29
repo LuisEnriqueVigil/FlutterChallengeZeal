@@ -1,3 +1,5 @@
+import 'package:challenge_app/presentation/pages/edit_user/binding/binding_edit_user.dart';
+import 'package:challenge_app/presentation/pages/edit_user/pages/edit_user_page.dart';
 import 'package:challenge_app/presentation/pages/home/binding/home_binding.dart';
 import 'package:challenge_app/presentation/pages/home/pages/home_page.dart';
 import 'package:challenge_app/presentation/pages/list_user/binding/binding_list_user.dart';
@@ -31,7 +33,12 @@ class PagesRoutes {
       name: AppRoutes.addNewUser,
       page: () => const NewUserPage(),
       binding: NewUserBinding(),
-    )
+    ),
+    GetPage(
+      name: AppRoutes.editUser,
+      page: () => const EditUserPage(),
+      binding: EditUserBinding(),
+    ),
    ];
 }
 

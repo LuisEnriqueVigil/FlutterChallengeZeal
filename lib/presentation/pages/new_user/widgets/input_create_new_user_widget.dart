@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 
 class InputCreatNewUserWidget extends StatelessWidget {
   final String hintext;
+  final bool ? isFromEdit;
+  final String?initValue;
   final Function(String value) onChange;
 
   const InputCreatNewUserWidget({
     super.key,
     required this.hintext,
+    this.isFromEdit = false,
+    this.initValue = "",
     required this.onChange,
   });
 
@@ -18,6 +22,8 @@ class InputCreatNewUserWidget extends StatelessWidget {
       child: TextFormField(
           //controller: _model.fieldEmailController,
           autofocus: false,
+          initialValue: (isFromEdit == true)? 
+            initValue:null,
           keyboardType: TextInputType.name,
           obscureText: false,
           validator: (value) {

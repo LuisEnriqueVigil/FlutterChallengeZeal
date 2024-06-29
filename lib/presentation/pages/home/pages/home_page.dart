@@ -35,38 +35,54 @@ class HomePage extends GetWidget<HomeController> {
             ),
           ),
           const SizedBox(height: 15.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ButtonOptionOnHome(
-                iconData: Icons.add_reaction,
-                onTap: (){
-                  Get.toNamed(AppRoutes.addNewUser);
-                },
-                titleButton: "Nuevo",
-              ),
-              ButtonOptionOnHome(
-                iconData: Icons.edit_note_sharp,
-                onTap: (){
-                  ListOfAllUserController listOfAllUserController = Get.find<ListOfAllUserController>();
-                  listOfAllUserController.origin.value = "update";
-                  listOfAllUserController.update();                  
-                  Get.toNamed(AppRoutes.listUsers);
-                },
-                titleButton: "Editar",
-              ),
-              ButtonOptionOnHome(
-                iconData: Icons.delete_sweep_rounded,
-                onTap: (){
-                  ListOfAllUserController listOfAllUserController = Get.find<ListOfAllUserController>();
-                    listOfAllUserController.origin.value = "delete";
-                    listOfAllUserController.update();
-                  Get.toNamed(AppRoutes.listUsers);
-                },
-                titleButton: "Eliminar",
-              )
-            ],
+          GetBuilder<HomeController>(
+            builder: (controller) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ButtonOptionOnHome(
+                    iconData: Icons.add_reaction,
+                    onTap: (){
+                      Get.toNamed(AppRoutes.addNewUser);
+                    },
+                    titleButton: "Nuevo",
+                  ),
+                  ButtonOptionOnHome(
+                    iconData: Icons.edit_note_sharp,
+                    onTap: (controller.loadingGetUsers.value)?
+                    (){}:
+                    ()async{
+                      await controller.getUserOnPage();
+                      ListOfAllUserController listOfAllUserController = Get.find<ListOfAllUserController>();
+                      listOfAllUserController.origin.value = "update";
+                      listOfAllUserController.listOfUsers = controller.userList;
+                      listOfAllUserController.update();                  
+                      Get.toNamed(AppRoutes.listUsers);
+                    },
+                    titleButton: (controller.loadingGetUsers.value)?
+                      "Cargando"
+                      :
+                      "Editar",
+                  ),
+                  ButtonOptionOnHome(
+                    iconData: Icons.delete_sweep_rounded,
+                    onTap:(controller.loadingGetUsers.value)?
+                    (){} :()async{
+                      await controller.getUserOnPage();
+                      ListOfAllUserController listOfAllUserController = Get.find<ListOfAllUserController>();
+                      listOfAllUserController.origin.value = "delete";
+                      listOfAllUserController.listOfUsers = controller.userList;
+                      listOfAllUserController.update();
+                      Get.toNamed(AppRoutes.listUsers);
+                    },
+                    titleButton:(controller.loadingGetUsers.value)?
+                      "Cargando":
+                       "Eliminar",
+                  )
+                ],
+              );
+            }
           ),
           const SizedBox(height: 20.0),
           const RowTitleButtonHomeWidget(),
